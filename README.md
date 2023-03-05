@@ -1,3 +1,3 @@
 # collab-code-editor
 
-# Link to the app: https://render-test-koh1.onrender.com
+Project description will be added soon.
