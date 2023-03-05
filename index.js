@@ -10,6 +10,7 @@ require('dotenv').config()
 
 /* middleware */
 app.use(cors())
+app.use(express.static('build'))
 
 /**
  * create a hashmap
