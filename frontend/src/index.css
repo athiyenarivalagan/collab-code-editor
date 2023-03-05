@@ -1,0 +1,226 @@
+/* Background */
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #EEEEEE;
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+.CodeMirror {
+  min-height: calc(100vh - 10px);
+  font-size: 20px;
+  line-height: 1.6;
+  padding-top: 20px;
+}
+
+ /* notification messages */
+.success-message,
+.error-message {
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: green;
+}
+
+.error-message {
+  color: red;
+}
+
+/* footer */
+.footer {
+  color: black;
+  font-style: italic;
+  font-size: 16;
+  text-align: center;
+}
+
+/* login page */
+.homeWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 100vh;
+}
+
+.formWrapper {
+  background: white;
+  padding: 20px 40px 20px;
+  border-radius: 10px;
+  width: 430px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  /* text-align: left; */
+}
+
+.formTitle {
+  display: flex;
+  justify-content: center;
+  color: black;
+  font-size: 28px;
+}
+
+.fontStyle {
+  font-weight: 400;
+}
+
+.inviteRoomId {
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputBox {
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  margin-bottom: 10px;
+  background: #eee;
+  font-family:'Courier New', Courier, monospace;
+  font-size: 16px;
+}
+
+hr {
+  border: 1px solid lightgrey;
+  width: 100%;
+  text-align: left;
+}
+
+.createInfo {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.createNewRoom {
+  color: darkblue;
+  text-decoration: none;
+  border-bottom: 1px solid darkblue;
+  transition: all 0.3s ease-in-out;
+}
+  
+.createNewRoom:hover {
+  color: cornflowerblue;
+  border-color: cornflowerblue;
+  cursor: pointer;
+}
+
+.btn {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: white;
+  font-weight: 400;
+  width: 100px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btnJoin,
+.btnLeave {
+  background: darkblue;
+  margin-left: auto;
+  width: 100%;
+}
+
+.btnJoin:hover,
+.btnLeave:hover {
+  background: cornflowerblue;
+}
+
+/* Editor page */
+.btnCopy {
+  margin-bottom: 10px;
+  /* background: #cecece; */
+  background: grey;
+  width: 100%;
+}
+
+.btnCopy:hover {
+  background: #cecece;
+}
+
+.editorWrapper {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 100%;
+}
+
+.asideContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  color: black;
+}
+
+.asideTitle {
+  border-bottom: 1px solid #424242;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.asideOnline {
+  font-size: 20px;
+  color: darkgreen;
+  text-align: center;
+}
+
+.clientsList {
+  flex-grow: 1;
+  overflow-y: scroll;
+  height: auto;
+  max-height: 500px;
+}
+
+ /* coustom scrollbar */
+.clientsList::-webkit-scrollbar {
+  width: 12px;
+}
+
+.clientsList::-webkit-scrollbar-thumb {
+  background-color: #4aed88;
+  border: 1px solid slategrey;
+  border-radius: 6px;
+}
+
+.btnGroup {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Users */
+.clientItem {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.clientItemText {
+  margin: auto;
+}
