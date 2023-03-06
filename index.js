@@ -32,7 +32,7 @@ function getAllActiveUsers(roomId) {
 io.on('connection', socket => {
   console.log('A new web connection is established!')
   socket.on('join', ({ roomId, username }) => {
-    console.log('socketId in the server: ', socket.id)
+    console.log('username: ', username)
     userSocketMap[socket.id] = username
     socket.join(roomId)
     // get current users

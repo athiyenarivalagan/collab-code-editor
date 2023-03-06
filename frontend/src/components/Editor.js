@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { ErrorNotification, SuccessNotification } from './Notification'
+// import { ErrorNotification, SuccessNotification } from './Notification'
+import { SuccessNotification } from './Notification'
 import EditorLogic from './EditorLogic'
 import User from './User'
 import { initSocket } from '../socket'
@@ -12,6 +13,8 @@ import {
 
 const Editor = () => {
   const [users, setUsers] = useState([])
+  // const [errorMessage, setErrorMessage] = useState(null)
+  const [successMessage, setSuccessMessage] = useState(null)
   /**
    * soketRef keeps track of websocket connections.
    * Returns an obj which has a key called current,
@@ -22,36 +25,18 @@ const Editor = () => {
   const location = useLocation()
   const { roomId } = useParams()
   const navigate = useNavigate()
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [successMessage, setSuccessMessage] = useState(null)
+  
 
   useEffect(() => {
-    init()
-    return () => {
-      socketRef.current.disconnect()
-      socketRef.current.off('joined')
-      socketRef.current.off('disconnected')
-    }
-  })
-
-  // async / await used inplace of the axios(promise) library.  
+    
   const init = async () => {
-    // socketRef.current = await initSocket()
-    socketRef.current = initSocket()
-
-    socketRef.current.on('connect_error', error => {
-      return handleErrors(error)
-    })
-    socketRef.current.on('connect_failed', error => {
-      return handleErrors(error)
-    })
+    socketRef.current = await initSocket()
+    socketRef.current.on('connect_error', error => handleErrors(error))
+    socketRef.current.on('connect_failed', error => handleErrors(error))
 
     function handleErrors(error) {
-      setErrorMessage('Socket connection failed, try again later')
-      setTimeout(() => {
-        setSuccessMessage(null)
-      }, 5000)
       console.log('socket error', error)
+      // implement error message
       navigate('/')
     }
 
@@ -63,13 +48,10 @@ const Editor = () => {
 
     // listen to the joined message from server
     socketRef.current.on('joined', ({ users, username, socketId }) => {
-      // setSuccessMessage(`${username} joined the room`)
-      // setTimeout(() => {
-      //   setSuccessMessage(null)
-      // }, 5000)
-      console.log(
-        `The user ${username} with socketId (${socketId}) just joined.`
-        )
+      if (username !== location.state?.username) {
+      // implement a success message
+      console.log(`The user ${username} just joined.`)
+      }
       setUsers(users)
       // send sync code message to server
       socketRef.current.emit('sync-code', {
@@ -86,6 +68,14 @@ const Editor = () => {
       })
     })
   }
+
+  init()
+    return () => {
+      socketRef.current.off('joined')
+      socketRef.current.off('disconnected')
+      socketRef.current.disconnect()
+    }
+  }, [])
 
   const copyRoomId = async () => {
     navigator.clipboard.writeText(roomId)
@@ -109,10 +99,10 @@ const Editor = () => {
     
   return (
     <div>
-      <ErrorNotification message={errorMessage} />
+      {/* <ErrorNotification message={errorMessage} /> */}
       <SuccessNotification message={successMessage} />
       <div className='editorWrapper'>
-        <aside className='asideContainer'>
+        <div className='asideContainer'>
           <h3 className='asideOnline'>Active Users</h3>
           <hr />
           {
@@ -136,8 +126,8 @@ const Editor = () => {
               Leave
             </button>
           </div>
-        </aside>
-        <section className='editor-content'>
+        </div>
+        <div className='editor-content'>
           <EditorLogic
             roomId={roomId}
             socketRef={socketRef}
@@ -145,7 +135,7 @@ const Editor = () => {
               codeRef.current = code;
             }}
           />
-        </section>
+        </div>
       </div>
     </div>
   )
